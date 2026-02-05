@@ -5,7 +5,16 @@ import jwt from "jsonwebtoken";
 import { run, get, all } from "./db.js";
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: [
+    "https://tuniaid.netlify.app",   // <-- mets ton vrai lien netlify ici
+    "http://localhost:5173",
+    "http://localhost:3000"
+  ],
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true
+}));
+
 app.use(express.json());
 
 const PORT = process.env.PORT || 4000;
@@ -387,3 +396,4 @@ app.post("/api/ai/chat", async (req,res)=>{
 
 await init();
 app.listen(PORT, () => console.log(`✅ API ready on port ${PORT}`));
+
