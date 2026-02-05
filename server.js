@@ -10,6 +10,9 @@ app.use(express.json());
 
 const PORT = 4000;
 const JWT_SECRET = "dev_secret_change_me"; // en prod => .env
+app.get("/api/health", (req, res) => {
+  res.json({ ok: true });
+});
 
 // --- init tables + seed ---
 async function init() {
@@ -415,3 +418,4 @@ app.post("/api/ai/chat", async (req, res) => {
 init().then(() => {
   app.listen(PORT, () => console.log(`API ready on http://localhost:${PORT}/api`));
 });
+
